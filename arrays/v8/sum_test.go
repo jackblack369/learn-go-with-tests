@@ -77,6 +77,11 @@ func TestFind(t *testing.T) {
 		Name string
 	}
 
+	type Company struct {
+		name    string
+		address string
+	}
+
 	t.Run("Find the best programmer", func(t *testing.T) {
 		people := []Person{
 			Person{Name: "Kent Beck"},
@@ -84,11 +89,24 @@ func TestFind(t *testing.T) {
 			Person{Name: "Chris James"},
 		}
 
+		companys := []Company{
+			Company{name: "Google", address: "Mountain View"},
+			Company{name: "Facebook", address: "Menlo Park"},
+			Company{name: "Amazon", address: "Seattle"},
+		}
+
 		king, found := Find(people, func(p Person) bool {
 			return strings.Contains(p.Name, "Chris")
 		})
 
+		oldGun, foundYou := FindYou(companys, func(c Company) bool {
+			return strings.Contains(c.name, "Google")
+		})
+
 		AssertTrue(t, found)
 		AssertEqual(t, king, Person{Name: "Chris James"})
+
+		AssertTrue(t, foundYou)
+		AssertEqual(t, oldGun, Company{name: "Google", address: "Mountain View"})
 	})
 }

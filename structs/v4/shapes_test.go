@@ -36,4 +36,14 @@ func TestArea(t *testing.T) {
 		}
 	})
 
+	t.Run("longest side", func(t *testing.T) {
+		rectangle := Rectangle{12, 6}
+		got := rectangle.Long()
+		want := 12.0
+
+		if got != want {
+			t.Errorf("got %g want %g", got, want)
+		}
+	})
+
 }

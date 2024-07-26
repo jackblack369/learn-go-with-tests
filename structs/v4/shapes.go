@@ -13,6 +13,14 @@ func (r Rectangle) Area() float64 {
 	return r.Width * r.Height
 }
 
+func (r Rectangle) Long() float64 {
+	if r.Width > r.Height {
+		return r.Width
+	} else {
+		return r.Height
+	}
+}
+
 // Perimeter returns the perimeter of a rectangle.
 func Perimeter(rectangle Rectangle) float64 {
 	return 2 * (rectangle.Width + rectangle.Height)

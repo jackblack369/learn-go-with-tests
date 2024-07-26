@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 // Sum calculates the total from a slice of numbers.
 func Sum(numbers []int) int {
 	sum := 0
@@ -15,6 +17,7 @@ func SumAllTails(numbersToSum ...[]int) []int {
 	for _, numbers := range numbersToSum {
 		tail := numbers[1:]
 		sums = append(sums, Sum(tail))
+		fmt.Println("numbers:", numbers, " tail:", tail, " sums:", sums)
 	}
 
 	return sums

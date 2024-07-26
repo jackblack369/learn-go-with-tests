@@ -18,10 +18,13 @@ func TestArea(t *testing.T) {
 
 	areaTests := []struct {
 		shape Shape
+		desc  string
 		want  float64
 	}{
-		{Rectangle{12, 6}, 72.0},
-		{Circle{10}, 314.1592653589793},
+		{shape: Rectangle{Width: 12, Height: 6}, desc: "A", want: 72.0},
+		{shape: Circle{Radius: 10}, desc: "B", want: 314.1592653589793},
+		{Rectangle{Width: 10, Height: 10}, "C", 100.0},
+		{Circle{20}, "D", 1256.6370614359173},
 	}
 
 	for _, tt := range areaTests {
