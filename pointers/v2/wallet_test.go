@@ -17,7 +17,7 @@ func TestWallet(t *testing.T) {
 
 	t.Run("deposit", func(t *testing.T) {
 		wallet := Wallet{}
-		wallet.Deposit(Bitcoin(10))
+		wallet.Deposit(Bitcoin(20))
 		assertBalance(t, wallet, Bitcoin(10))
 	})
 

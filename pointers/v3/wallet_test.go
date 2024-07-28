@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -40,7 +41,7 @@ func TestWallet(t *testing.T) {
 		startingBalance := Bitcoin(20)
 		wallet := Wallet{startingBalance}
 		err := wallet.Withdraw(Bitcoin(100))
-
+		fmt.Print(err)
 		assertError(t, err)
 		assertBalance(t, wallet, startingBalance)
 	})
