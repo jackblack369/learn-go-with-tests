@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 const (
 	// ErrNotFound means the definition could not be found for the given word
 	ErrNotFound = DictionaryErr("could not find the word you were looking for")
@@ -9,6 +11,8 @@ const (
 
 	// ErrWordDoesNotExist occurs when trying to update a word not in the dictionary
 	ErrWordDoesNotExist = DictionaryErr("cannot update word because it does not exist")
+
+	ErrWordIsViolence = DictionaryErr("cannot add word because it is violent")
 )
 
 // DictionaryErr are errors that can happen when interacting with the dictionary.
@@ -24,6 +28,10 @@ type Dictionary map[string]string
 // Search find a word in the dictionary.
 func (d Dictionary) Search(word string) (string, error) {
 	definition, ok := d[word]
+	if word == "kill" {
+		return "", ErrWordIsViolence
+	}
+
 	if !ok {
 		return "", ErrNotFound
 	}
@@ -37,6 +45,9 @@ func (d Dictionary) Add(word, definition string) error {
 	switch err {
 	case ErrNotFound:
 		d[word] = definition
+	case ErrWordIsViolence:
+		fmt.Println("You cannot add the word kill, it is violent, we will add peace & love instead")
+		d[word] = "peace & love"
 	case nil:
 		return ErrWordExists
 	default:
@@ -53,6 +64,8 @@ func (d Dictionary) Update(word, definition string) error {
 	switch err {
 	case ErrNotFound:
 		return ErrWordDoesNotExist
+	case ErrWordIsViolence:
+		return ErrWordIsViolence
 	case nil:
 		d[word] = definition
 	default:

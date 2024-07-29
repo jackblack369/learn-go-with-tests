@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -26,9 +27,15 @@ func TestAdd(t *testing.T) {
 	word := "test"
 	definition := "this is just a test"
 
+	word2 := "test2"
+	definition2 := "this is just a test2"
+
 	dictionary.Add(word, definition)
+	dictionary.Add(word2, definition2)
 
 	assertDefinition(t, dictionary, word, definition)
+	assertDefinition(t, dictionary, word2, definition2)
+	assertDefinition(t, dictionary, "test3", "this is just a test3")
 }
 
 func assertStrings(t testing.TB, got, want string) {
@@ -51,6 +58,7 @@ func assertDefinition(t testing.TB, dictionary Dictionary, word, definition stri
 	t.Helper()
 
 	got, err := dictionary.Search(word)
+	fmt.Println("got is ", got, ", err is", err)
 	if err != nil {
 		t.Fatal("should find added word:", err)
 	}
