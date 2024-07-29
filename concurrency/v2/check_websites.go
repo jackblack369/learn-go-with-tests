@@ -1,6 +1,7 @@
 package concurrency
 
 import (
+	"fmt"
 	"time"
 )
 
@@ -15,6 +16,10 @@ func CheckWebsites(wc WebsiteChecker, urls []string) map[string]bool {
 	for _, url := range urls {
 		go func(u string) {
 			results[u] = wc(u)
+		}(url)
+
+		go func(u string) {
+			fmt.Println(u)
 		}(url)
 	}
 
