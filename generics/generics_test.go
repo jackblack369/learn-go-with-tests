@@ -42,4 +42,12 @@ func TestStack(t *testing.T) {
 		secondNum, _ := myStackOfInts.Pop()
 		AssertEqual(t, firstNum+secondNum, 3)
 	})
+
+	t.Run("string stack", func(t *testing.T) {
+		otherStackOfStr := new(Stack[string])
+		AssertTrue(t, otherStackOfStr.IsEmpty())
+
+		otherStackOfStr.Push("brook")
+		AssertFalse(t, otherStackOfStr.IsEmpty())
+	})
 }

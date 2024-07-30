@@ -1,6 +1,7 @@
 package racer
 
 import (
+	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -13,7 +14,9 @@ func TestRacer(t *testing.T) {
 	fastServer := makeDelayedServer(0 * time.Millisecond)
 
 	defer slowServer.Close()
+	fmt.Println("close slowServer.URL", slowServer.URL)
 	defer fastServer.Close()
+	fmt.Println("close fastServer.URL", fastServer.URL)
 
 	slowURL := slowServer.URL
 	fastURL := fastServer.URL

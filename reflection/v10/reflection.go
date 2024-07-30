@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"reflect"
 )
 
@@ -23,6 +24,7 @@ func walk(x interface{}, fn func(input string)) {
 			walkValue(val.Index(i))
 		}
 	case reflect.Map:
+		fmt.Println("Map scenario, x:", x, ", getValue(x):", val, ", val.MapKeys():", val.MapKeys())
 		for _, key := range val.MapKeys() {
 			walkValue(val.MapIndex(key))
 		}
